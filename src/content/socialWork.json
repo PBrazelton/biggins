@@ -1,26 +1,26 @@
 [
   {
-    "id": "social-1",
-    "label": "Campaign carousel",
+    "id": "simpli-phi",
+    "label": "Simpli-PHI enrollment",
     "platform": "Instagram",
-    "image": null
+    "image": "assets/social/simpli-phi.png"
   },
   {
-    "id": "social-2",
-    "label": "Event flyer",
-    "platform": "Print · IG",
-    "image": null
+    "id": "acute-call",
+    "label": "Book an acute call",
+    "platform": "Facebook · IG",
+    "image": "assets/social/acute-call.png"
   },
   {
-    "id": "social-3",
-    "label": "Story series",
-    "platform": "Stories",
-    "image": null
-  },
-  {
-    "id": "social-4",
-    "label": "Announcement",
+    "id": "vet-homeopathy",
+    "label": "Veterinary Homeopathy Institute",
     "platform": "Instagram",
-    "image": null
+    "image": "assets/social/vet-homeopathy.png"
+  },
+  {
+    "id": "podcast",
+    "label": "Veterinary Homeopathy School",
+    "platform": "Podcast promo",
+    "image": "assets/social/podcast.png"
   }
 ]

@@ -19,9 +19,13 @@ import img12 from "../assets/portrait.jpg";
 import img13 from "../assets/raya-therapy-dog.png";
 import img14 from "../assets/red-tide-kayaks.jpg";
 import img15 from "../assets/rugby.jpg";
-import img16 from "../assets/softball.jpg";
-import img17 from "../assets/te-amo-cafe.png";
-import img18 from "../assets/witches.jpg";
+import img16 from "../assets/social/acute-call.png";
+import img17 from "../assets/social/podcast.png";
+import img18 from "../assets/social/simpli-phi.png";
+import img19 from "../assets/social/vet-homeopathy.png";
+import img20 from "../assets/softball.jpg";
+import img21 from "../assets/te-amo-cafe.png";
+import img22 from "../assets/witches.jpg";
 
 export const imageMap: Record<string, ImageMetadata> = {
   "assets/about-reporting.jpg": img0,
@@ -40,7 +44,11 @@ export const imageMap: Record<string, ImageMetadata> = {
   "assets/raya-therapy-dog.png": img13,
   "assets/red-tide-kayaks.jpg": img14,
   "assets/rugby.jpg": img15,
-  "assets/softball.jpg": img16,
-  "assets/te-amo-cafe.png": img17,
-  "assets/witches.jpg": img18,
+  "assets/social/acute-call.png": img16,
+  "assets/social/podcast.png": img17,
+  "assets/social/simpli-phi.png": img18,
+  "assets/social/vet-homeopathy.png": img19,
+  "assets/softball.jpg": img20,
+  "assets/te-amo-cafe.png": img21,
+  "assets/witches.jpg": img22,
 };
