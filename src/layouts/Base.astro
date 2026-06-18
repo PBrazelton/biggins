@@ -1,0 +1,68 @@
+---
+import '../styles/styles.css';
+import '../styles/site.css';
+import site from '../data/site.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Contact page renders its own rich footer (which carries the colophon),
+   *  so it suppresses the global slim colophon footer. */
+  showFooter?: boolean;
+}
+const {
+  title = `${site.name} — Environmental journalist`,
+  description = site.role,
+  showFooter = true,
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === '/') return pathname === '/';
+  // Only match the section root or its descendants — not sibling paths that
+  // merely share a prefix (e.g. "/writing-old" must not light up "/writing/").
+  const base = href.endsWith('/') ? href : href + '/';
+  return pathname === href || pathname.startsWith(base);
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=Caveat:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a class="mark" href="/" style="text-decoration:none;color:inherit">{site.name}<span class="dot"></span></a>
+    <ul>
+      {site.nav.map((n) => (
+        <li><a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a></li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<slot />
+
+{showFooter && (
+  <footer>
+    <div class="wrap">
+      <div class="colophon">
+        {site.colophon.map((line) => <span>{line}</span>)}
+      </div>
+    </div>
+  </footer>
+)}
+
+</body>
+</html>

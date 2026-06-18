@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import { bgImage } from '../lib/images';
+import about from '../data/about.json';
+import sections from '../data/sections.json';
+
+const fieldPhoto = await bgImage(about.fieldPhoto.image, 1000);
+---
+<Base title="About — Amelie Brazelton">
+  <main>
+    <section id="about" class="about">
+      <div class="about-rail">
+        <div class="num">{sections.about.num}</div>
+        <figure class="field-photo">
+          <div class="img" style={fieldPhoto ? `background-image:url('${fieldPhoto}')` : undefined}></div>
+          <figcaption>{about.fieldPhoto.caption} · <span class="where">{about.fieldPhoto.location}</span></figcaption>
+        </figure>
+      </div>
+      <div>
+        {about.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+      <dl class="sidebar">
+        {about.sidebar.map((row) => (
+          <Fragment>
+            <dt>{row.label}</dt>
+            <dd>{row.value}</dd>
+          </Fragment>
+        ))}
+      </dl>
+    </section>
+  </main>
+</Base>

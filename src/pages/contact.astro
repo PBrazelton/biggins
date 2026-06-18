@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Emphasis from '../components/Emphasis.astro';
+import { resolveImage } from '../lib/images';
+import contact from '../data/contact.json';
+import site from '../data/site.json';
+
+const headshot = resolveImage(contact.headshot);
+---
+<Base title="Contact — Amelie Brazelton" description={contact.pitch} showFooter={false}>
+  <main>
+  <footer id="contact" class="fullbleed">
+    <div class="wrap">
+      <div class="contact-lead">
+        <figure class="contact-headshot">
+          {headshot && <Image src={headshot} alt={site.name} width={520} quality={80} format="webp" />}
+        </figure>
+        <div class="contact-intro">
+          <h3><Emphasis text={contact.heading} emphasis={contact.emphasis} /></h3>
+          <p class="pitch">{contact.pitch}</p>
+        </div>
+      </div>
+      <div>
+        <div class="col-label">Email</div>
+        <ul>
+          <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
+        </ul>
+        <div class="col-label" style="margin-top:24px">Press kit</div>
+        <ul>
+          <li><a href={contact.pressKit.url}>{contact.pressKit.label}</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-label">Elsewhere</div>
+        <ul>
+          {contact.elsewhere.map((link) => (
+            <li><a href={link.url} target="_blank" rel="noopener">{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <div class="col-label">On file</div>
+        <ul>
+          {contact.onFile.map((link) => (
+            <li><a href={link.url}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="colophon">
+        {site.colophon.map((line) => <span>{line}</span>)}
+      </div>
+    </div>
+  </footer>
+  </main>
+</Base>

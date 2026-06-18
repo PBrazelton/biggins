@@ -1,0 +1,13 @@
+/* Additive structural utility — does NOT alter the imported design system
+   (styles.css). It lets a section live inside the single <main> landmark while
+   still spanning the full viewport. The source export achieved full-bleed by
+   placing these sections outside <main>; this reproduces that exactly.
+
+   The calc() cancels <main>'s centering + horizontal padding at every
+   breakpoint (56 / 32 / 20px), so the result is pixel-identical. Safe because
+   <body> has overflow-x: hidden. */
+.fullbleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}

@@ -1,0 +1,21 @@
+---
+import { bgImage } from '../lib/images';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  essay: CollectionEntry<'essays'>['data'];
+}
+const { essay } = Astro.props;
+const img = await bgImage(essay.image, 900);
+// Essays are the only internal child pages; id is the slug.
+const href = `/creative/${essay.id}/`;
+---
+<a class="snap" href={href}>
+  <div class="img" style={img ? `background-image:url('${img}')` : undefined}></div>
+  <div class="snap-body">
+    <div class="meta"><span class="cat">{essay.category}</span><span>{essay.period}</span></div>
+    <h4 class="cap">{essay.title}</h4>
+    <p class="excerpt">{essay.excerpt}</p>
+    <span class="readlink">Read →</span>
+  </div>
+</a>

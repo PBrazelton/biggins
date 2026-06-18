@@ -1,0 +1,32 @@
+---
+import { bgImage } from '../lib/images';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  clip: CollectionEntry<'clips'>['data'];
+}
+const { clip } = Astro.props;
+const thumb = await bgImage(clip.thumbnail, 900);
+---
+<article class="clip">
+  <figure class="thumb-fig">
+    <div class="thumb" style={thumb ? `background-image:url('${thumb}')` : undefined}></div>
+    <figcaption class="credit">{clip.credit}</figcaption>
+  </figure>
+  <div class="body">
+    <div class="date">{clip.date} · <span class="pub">{clip.publication}</span></div>
+    <h3><a href={clip.url} target="_blank" rel="noopener">{clip.title}</a></h3>
+    <p class="deck">{clip.deck}</p>
+  </div>
+  <div class="aside">
+    <div class="tags">{clip.tags.map((t) => <span>{t}</span>)}</div>
+    {clip.note && (
+      <details class="rnote">
+        <summary>Behind the story</summary>
+        <div class="rnote-body">
+          {clip.note.map((p) => <p>{p}</p>)}
+        </div>
+      </details>
+    )}
+  </div>
+</article>

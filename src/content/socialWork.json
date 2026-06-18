@@ -1,0 +1,26 @@
+[
+  {
+    "id": "social-1",
+    "label": "Campaign carousel",
+    "platform": "Instagram",
+    "image": null
+  },
+  {
+    "id": "social-2",
+    "label": "Event flyer",
+    "platform": "Print · IG",
+    "image": null
+  },
+  {
+    "id": "social-3",
+    "label": "Story series",
+    "platform": "Stories",
+    "image": null
+  },
+  {
+    "id": "social-4",
+    "label": "Announcement",
+    "platform": "Instagram",
+    "image": null
+  }
+]

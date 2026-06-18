@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Emphasis from '../components/Emphasis.astro';
+import ClipCard from '../components/ClipCard.astro';
+import EssayCard from '../components/EssayCard.astro';
+import FieldFrame from '../components/FieldFrame.astro';
+import SocialTile from '../components/SocialTile.astro';
+import { bgImage } from '../lib/images';
+import hero from '../data/hero.json';
+import sections from '../data/sections.json';
+
+const clips = (await getCollection('clips')).map((e) => e.data);
+const essays = (await getCollection('essays')).map((e) => e.data);
+const fieldFrames = (await getCollection('fieldFrames')).map((e) => e.data);
+const socialWork = (await getCollection('socialWork')).map((e) => e.data);
+
+const clipHighlights = clips.slice(0, 3);
+const essayHighlights = essays.slice(0, 3);
+
+const portrait = await bgImage(hero.portrait.image, 1000);
+---
+<Base>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="eyebrow">{hero.eyebrow}</div>
+        <h1><Emphasis text={hero.headline} emphasis={hero.emphasis} /></h1>
+        <p class="lede">{hero.lede}</p>
+        <div class="meta">
+          {hero.meta.map((m) => <span>{m}</span>)}
+        </div>
+      </div>
+      <div class="portrait" style={portrait ? `background-image:url('${portrait}')` : undefined}>
+        <div class="caption">{hero.portrait.caption}</div>
+      </div>
+    </section>
+
+    <!-- WRITING — highlights -->
+    <section id="writing">
+      <div class="section-head">
+        <div class="num">{sections.writing.num}</div>
+        <h2><Emphasis text={sections.writing.title} emphasis={sections.writing.emphasis} /></h2>
+      </div>
+      <div class="clips">
+        {clipHighlights.map((clip) => <ClipCard clip={clip} />)}
+      </div>
+      <p class="more">More in writing → <a href="/writing/">selected writing &amp; research</a></p>
+    </section>
+
+  <!-- FROM THE FIELD — tideline (full-bleed) -->
+  <section id="field" class="archive fullbleed">
+    <div class="head">
+      <div class="num">{sections.field.num}</div>
+      <div>
+        <h2><Emphasis text={sections.field.title} emphasis={sections.field.emphasis} /></h2>
+        <p class="sub">{sections.field.sub}</p>
+      </div>
+    </div>
+    <div class="tideline">
+      <div class="tideline-track">
+        {fieldFrames.map((frame) => <FieldFrame frame={frame} />)}
+        {/* duplicate set for seamless marquee loop */}
+        {fieldFrames.map((frame) => <FieldFrame frame={frame} duplicate />)}
+      </div>
+    </div>
+    <p class="ig-handle">More frames on Instagram — <a href="https://www.instagram.com/ami.5605/" target="_blank" rel="noopener">@ami.5605</a></p>
+  </section>
+
+  <!-- CREATIVE NONFICTION — highlights (full-bleed) -->
+  <section id="creative" class="creative fullbleed">
+    <div class="inner">
+      <div class="kicker">{sections.creative.num}</div>
+      <h2><a href="/creative/">{sections.creative.title}</a><span class="serifit">{sections.creative.subtitle}</span></h2>
+      <p class="intro">{sections.creative.intro}</p>
+      <div class="snaps">
+        {essayHighlights.map((essay) => <EssayCard essay={essay} />)}
+      </div>
+      <p class="more">More in the journal → <a href="/creative/">open the notebook</a></p>
+    </div>
+  </section>
+
+  <!-- SOCIAL & VISUAL -->
+  <section id="social" class="social">
+      <div class="section-head">
+        <div class="num">{sections.social.num}</div>
+        <div>
+          <h2><Emphasis text={sections.social.title} emphasis={sections.social.emphasis} /></h2>
+          <p class="sub">{sections.social.sub}</p>
+        </div>
+      </div>
+      <div class="socgrid">
+        {socialWork.map((tile) => <SocialTile tile={tile} />)}
+      </div>
+    </section>
+  </main>
+</Base>

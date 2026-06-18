@@ -1,0 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import { resolveImage } from '../lib/images';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  tile: CollectionEntry<'socialWork'>['data'];
+}
+const { tile } = Astro.props;
+// image is null today (placeholder). styles.css styles a bare <image-slot>
+// element as a neutral 4:5 block, so render that rather than a broken <img>.
+const src = resolveImage(tile.image);
+---
+<figure class="soctile">
+  {src ? (
+    <Image src={src} alt={tile.label} width={1200} quality={80} format="webp" />
+  ) : (
+    <image-slot role="img" aria-label={`${tile.label} — placeholder graphic`}></image-slot>
+  )}
+  <figcaption><span>{tile.label}</span><span class="plat">{tile.platform}</span></figcaption>
+</figure>

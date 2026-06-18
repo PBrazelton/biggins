@@ -1,0 +1,37 @@
+{
+  "writing": {
+    "num": "§ 01 — Selected Writing",
+    "title": "Field reporting, culture & climate.",
+    "emphasis": "climate"
+  },
+  "research": {
+    "num": "§ 01b — Academic & Science",
+    "title": "Research & longer study.",
+    "emphasis": "longer study"
+  },
+  "field": {
+    "num": "§ 02 — From the Field",
+    "title": "The tideline.",
+    "emphasis": "tideline",
+    "sub": "A drifting archive of frames from assignment and travel — Gulf Coast, Brazil, Spain, and the long road between newsrooms."
+  },
+  "creative": {
+    "num": "§ 03 — Creative Nonfiction & Personal",
+    "title": "The notebook",
+    "subtitle": "— essays, in a quieter voice.",
+    "intro": "Where the reporting ends and the reflecting begins. Personal essays and literary nonfiction, entered through the image that started each one. Tap a frame to read.",
+    "more": {
+      "label": "read the latest",
+      "url": "#"
+    }
+  },
+  "social": {
+    "num": "§ 04 — Social & Visual",
+    "title": "Design for the feed.",
+    "emphasis": "feed",
+    "sub": "Graphics, flyers and campaign assets built across three years of social media work for small arts and environmental organizations."
+  },
+  "about": {
+    "num": "§ 05 — About"
+  }
+}

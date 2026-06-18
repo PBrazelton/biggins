@@ -1,0 +1,38 @@
+{
+  "fieldPhoto": {
+    "image": "assets/about-reporting.jpg",
+    "caption": "On assignment, interviewing at the Get Rescued races",
+    "location": "Gulfport, FL"
+  },
+  "paragraphs": [
+    "I write about the seams where people meet the natural world — fisheries, watersheds, harvests, hurricanes — and the cultures that translate between them. My training is in environmental journalism, but my notebook spends as much time in a Brazilian favela or a Seville street market as it does in a Minneapolis newsroom.",
+    "I am a Fulbright U.S. Semi-Finalist for the Brazil English Teaching Assistantship, a former Rotary Youth Exchange student to Brazil, and a graduate of Eckerd College's environmental journalism program. I work bilingually in Portuguese and Spanish.",
+    "For three years I have led social media strategy for a portfolio of small organizations — work that has taught me to translate the same story across audiences and formats without losing what makes it true."
+  ],
+  "sidebar": [
+    {
+      "label": "Beat",
+      "value": "Environment · Latin America · Culture"
+    },
+    {
+      "label": "Languages",
+      "value": "English · Portuguese · Spanish"
+    },
+    {
+      "label": "Bylines",
+      "value": "The Gabber · Triton Publ. · Sweet Lit."
+    },
+    {
+      "label": "Education",
+      "value": "B.A., Eckerd College, '25, magna cum laude"
+    },
+    {
+      "label": "Honors",
+      "value": "Fulbright U.S. Semi-Finalist, Brazil ETA"
+    },
+    {
+      "label": "Based",
+      "value": "Minneapolis, MN"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  doc: CollectionEntry<'documents'>['data'];
+}
+const { doc } = Astro.props;
+// PDFs live in public/assets/docs — the content path "assets/docs/x.pdf"
+// becomes the absolute URL "/assets/docs/x.pdf".
+const href = '/' + doc.file.replace(/^\/+/, '');
+---
+<article class="docrow">
+  <a class="doccard" href={href} target="_blank" rel="noopener">
+    <div class="page">
+      <div class="ptype">{doc.type} · {doc.year}</div>
+      <div class="ptitle">{doc.shortTitle}</div>
+      <div class="pfoot"><span>{doc.filesize}</span><span class="read">↗</span></div>
+    </div>
+  </a>
+  <div class="doc-body">
+    <div class="date">{doc.date} · <span class="pub">{doc.publisher}</span></div>
+    <h4><a href={href} target="_blank" rel="noopener">{doc.title}</a></h4>
+    <p class="abstract">{doc.abstract}</p>
+    <div class="actions">
+      <a class="read" href={href} target="_blank" rel="noopener">Read the piece →</a>
+      <a class="dl" href={href} download>Download PDF ↓</a>
+    </div>
+  </div>
+</article>

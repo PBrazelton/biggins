@@ -1,0 +1,20 @@
+---
+// Renders `text` with the first occurrence of `emphasis` wrapped in <em>
+// (styled ochre italic in styles.css). If emphasis is empty or not found,
+// renders plain text. Used for hero.headline, section titles, contact.heading.
+interface Props {
+  text: string;
+  emphasis?: string | null;
+}
+const { text, emphasis } = Astro.props;
+
+const idx = emphasis ? text.indexOf(emphasis) : -1;
+const before = idx >= 0 ? text.slice(0, idx) : text;
+const match = idx >= 0 ? text.slice(idx, idx + emphasis!.length) : '';
+const after = idx >= 0 ? text.slice(idx + emphasis!.length) : '';
+---
+{idx >= 0 ? (
+  <Fragment>{before}<em>{match}</em>{after}</Fragment>
+) : (
+  <Fragment>{text}</Fragment>
+)}

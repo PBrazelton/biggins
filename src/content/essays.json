@@ -1,0 +1,65 @@
+[
+  {
+    "id": "te-amo-sempre-filha",
+    "category": "Creative nonfiction",
+    "period": "Apr 2026",
+    "title": "Te amo sempre, filha",
+    "excerpt": "Returning to Curitiba, and the host mother whose love outran her politics.",
+    "image": "assets/te-amo-cafe.png",
+    "illustrated": false,
+    "body": "content/essays/te-amo-sempre-filha.md",
+    "url": "creative/te-amo-sempre-filha.html"
+  },
+  {
+    "id": "red-tide-summer",
+    "category": "Creative nonfiction",
+    "period": "Summer",
+    "title": "Red Tide Summer",
+    "excerpt": "A summer guiding kayak tours on Anna Maria Island, and the red tide that turned the bay to a graveyard.",
+    "image": "assets/red-tide-kayaks.jpg",
+    "illustrated": false,
+    "body": "content/essays/red-tide-summer.md",
+    "url": "creative/red-tide-summer.html"
+  },
+  {
+    "id": "hello-again",
+    "category": "Creative nonfiction",
+    "period": "Autumn",
+    "title": "Hello, again.",
+    "excerpt": "A campus bar, a new girlfriend's friends, and a memory of the first girl I ever practiced kissing.",
+    "image": "assets/hello-again-bar.png",
+    "illustrated": false,
+    "body": "content/essays/hello-again.md",
+    "url": "creative/hello-again.html"
+  },
+  {
+    "id": "nine-innings",
+    "category": "Personal",
+    "period": "2024",
+    "title": "Nine innings, no notebook",
+    "excerpt": "An afternoon at the ballpark with nothing to file and everything to notice.",
+    "image": "assets/softball.jpg",
+    "illustrated": false,
+    "url": "#"
+  },
+  {
+    "id": "becoming-witch",
+    "category": "Essay",
+    "period": "2024",
+    "title": "Becoming the witch for one night",
+    "excerpt": "Joining the procession — and what it feels like to be looked at instead of looking.",
+    "image": "assets/witches.jpg",
+    "illustrated": false,
+    "url": "#"
+  },
+  {
+    "id": "returning-mfa",
+    "category": "Personal",
+    "period": "2025",
+    "title": "Why I keep returning to the MFA",
+    "excerpt": "On the museum I treat as a second desk, and the paintings that keep me honest.",
+    "image": "assets/museum.jpg",
+    "illustrated": false,
+    "url": "#"
+  }
+]

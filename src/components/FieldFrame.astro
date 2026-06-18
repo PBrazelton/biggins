@@ -1,0 +1,17 @@
+---
+import { bgImage } from '../lib/images';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  frame: CollectionEntry<'fieldFrames'>['data'];
+  // The marquee needs each frame twice for a seamless loop. Frames are stored
+  // once; the parent renders the list twice and hides the duplicate set from AT.
+  duplicate?: boolean;
+}
+const { frame, duplicate = false } = Astro.props;
+const img = await bgImage(frame.image, 1100);
+const cls = frame.orientation === 'wide' ? 'frame wide' : 'frame';
+---
+<div class={cls} style={img ? `background-image:url('${img}')` : undefined} aria-hidden={duplicate ? 'true' : undefined}>
+  <span class="cap">{frame.caption}</span>
+</div>
