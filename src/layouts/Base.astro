@@ -1,7 +1,9 @@
 ---
 import '../styles/styles.css';
 import '../styles/site.css';
-import site from '../data/site.json';
+import { fetchSite } from '../lib/queries';
+
+const site = await fetchSite();
 
 interface Props {
   title?: string;

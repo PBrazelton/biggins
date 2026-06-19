@@ -1,13 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Emphasis from '../../components/Emphasis.astro';
 import ClipCard from '../../components/ClipCard.astro';
 import DocRow from '../../components/DocRow.astro';
-import sections from '../../data/sections.json';
+import { fetchWriting } from '../../lib/queries';
 
-const clips = (await getCollection('clips')).map((e) => e.data);
-const documents = (await getCollection('documents')).map((e) => e.data);
+const { sections, clips, documents } = await fetchWriting();
 ---
 <Base title="Writing — Amelie Brazelton">
   <main>

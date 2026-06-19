@@ -1,10 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
-import { bgImage } from '../lib/images';
-import about from '../data/about.json';
-import sections from '../data/sections.json';
+import { imageUrl } from '../lib/sanity';
+import { fetchAbout } from '../lib/queries';
 
-const fieldPhoto = await bgImage(about.fieldPhoto.image, 1000);
+const { sections, about } = await fetchAbout();
+const fieldPhoto = imageUrl(about.fieldPhoto?.image, 1000);
 ---
 <Base title="About — Amelie Brazelton">
   <main>

@@ -1,12 +1,9 @@
 ---
-import { bgImage } from '../lib/images';
-import type { CollectionEntry } from 'astro:content';
+import { imageUrl } from '../lib/sanity';
 
-interface Props {
-  clip: CollectionEntry<'clips'>['data'];
-}
 const { clip } = Astro.props;
-const thumb = await bgImage(clip.thumbnail, 900);
+const thumb = imageUrl(clip.thumbnail, 900);
+const note = Array.isArray(clip.note) ? clip.note.filter((p: string) => p && p.trim()) : [];
 ---
 <article class="clip">
   <figure class="thumb-fig">
@@ -19,12 +16,12 @@ const thumb = await bgImage(clip.thumbnail, 900);
     <p class="deck">{clip.deck}</p>
   </div>
   <div class="aside">
-    <div class="tags">{clip.tags.map((t) => <span>{t}</span>)}</div>
-    {clip.note && (
+    <div class="tags">{(clip.tags ?? []).map((t: string) => <span>{t}</span>)}</div>
+    {note.length > 0 && (
       <details class="rnote">
         <summary>Behind the story</summary>
         <div class="rnote-body">
-          {clip.note.map((p) => <p>{p}</p>)}
+          {note.map((p: string) => <p>{p}</p>)}
         </div>
       </details>
     )}

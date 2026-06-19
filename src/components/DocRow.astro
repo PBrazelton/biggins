@@ -1,13 +1,7 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-
-interface Props {
-  doc: CollectionEntry<'documents'>['data'];
-}
 const { doc } = Astro.props;
-// PDFs live in public/assets/docs — the content path "assets/docs/x.pdf"
-// becomes the absolute URL "/assets/docs/x.pdf".
-const href = '/' + doc.file.replace(/^\/+/, '');
+// Sanity file asset URL (PDF). Forcing ?dl gives the download a clean filename.
+const href = doc.fileUrl ?? '#';
 ---
 <article class="docrow">
   <a class="doccard" href={href} target="_blank" rel="noopener">

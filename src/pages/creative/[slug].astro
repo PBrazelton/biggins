@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+import { imageUrl } from '../../lib/sanity';
+import { fetchEssays } from '../../lib/queries';
+import { renderBody } from '../../lib/portableText';
+
+export async function getStaticPaths() {
+  const essays = await fetchEssays();
+  return essays.map((essay: any) => ({ params: { slug: essay.slug }, props: { essay } }));
+}
+
+const { essay } = Astro.props;
+const img = imageUrl(essay.image, 1200);
+const bodyHtml = renderBody(essay.body);
+---
+<Base title={`${essay.title} — Amelie Brazelton`} description={essay.excerpt}>
+  <main>
+  <section class="creative fullbleed">
+    <div class="inner" style="max-width:760px">
+      <p class="more"><a href="/creative/">← Back to the notebook</a></p>
+      <div class="kicker">{essay.category} · {essay.period}</div>
+      <h2>{essay.title}</h2>
+      {img && (
+        <figure style="margin:28px 0">
+          <img src={img} alt={essay.title} loading="lazy" style="width:100%;height:auto;border:1px solid var(--rule)" />
+        </figure>
+      )}
+      {bodyHtml ? (
+        <div class="essay-body" set:html={bodyHtml} />
+      ) : (
+        <>
+          <p class="intro">{essay.excerpt}</p>
+          <p class="intro" style="color:var(--muted)"><em>The full essay is on its way — check back soon.</em></p>
+        </>
+      )}
+    </div>
+  </section>
+  </main>
+</Base>

@@ -1,14 +1,9 @@
 ---
-import { bgImage } from '../lib/images';
-import type { CollectionEntry } from 'astro:content';
+import { imageUrl } from '../lib/sanity';
 
-interface Props {
-  essay: CollectionEntry<'essays'>['data'];
-}
 const { essay } = Astro.props;
-const img = await bgImage(essay.image, 900);
-// Essays are the only internal child pages; id is the slug.
-const href = `/creative/${essay.id}/`;
+const img = imageUrl(essay.image, 900);
+const href = `/creative/${essay.slug}/`;
 ---
 <a class="snap" href={href}>
   <div class="img" style={img ? `background-image:url('${img}')` : undefined}></div>

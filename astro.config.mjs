@@ -1,9 +1,10 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, passthroughImageService } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ameliebrazelton.com',
-  // Images are optimized per-call via <Image>/getImage (WebP, quality ~80,
-  // capped at ~1600px) in src/lib/images.ts and the card components.
+  // Images are served + transformed by Sanity's CDN (see src/lib/sanity.ts), so
+  // we don't use astro:assets/sharp. Passthrough avoids the sharp dependency.
+  image: { service: passthroughImageService() },
 });

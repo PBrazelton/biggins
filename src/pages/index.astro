@@ -1,24 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Emphasis from '../components/Emphasis.astro';
 import ClipCard from '../components/ClipCard.astro';
 import EssayCard from '../components/EssayCard.astro';
 import FieldFrame from '../components/FieldFrame.astro';
 import SocialTile from '../components/SocialTile.astro';
-import { bgImage } from '../lib/images';
-import hero from '../data/hero.json';
-import sections from '../data/sections.json';
+import { imageUrl } from '../lib/sanity';
+import { fetchHome } from '../lib/queries';
 
-const clips = (await getCollection('clips')).map((e) => e.data);
-const essays = (await getCollection('essays')).map((e) => e.data);
-const fieldFrames = (await getCollection('fieldFrames')).map((e) => e.data);
-const socialWork = (await getCollection('socialWork')).map((e) => e.data);
+const { hero, sections, clips: clipHighlights, essays: essayHighlights, fieldFrames, socialWork } = await fetchHome();
 
-const clipHighlights = clips.slice(0, 3);
-const essayHighlights = essays.slice(0, 3);
-
-const portrait = await bgImage(hero.portrait.image, 1000);
+const portrait = imageUrl(hero.portrait?.image, 1000);
 ---
 <Base>
   <main>

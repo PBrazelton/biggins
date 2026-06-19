@@ -1,12 +1,11 @@
 ---
-import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Emphasis from '../components/Emphasis.astro';
-import { resolveImage } from '../lib/images';
-import contact from '../data/contact.json';
-import site from '../data/site.json';
+import { imageUrl } from '../lib/sanity';
+import { fetchContact, fetchSite } from '../lib/queries';
 
-const headshot = resolveImage(contact.headshot);
+const [contact, site] = await Promise.all([fetchContact(), fetchSite()]);
+const headshot = imageUrl(contact.headshot, 520);
 ---
 <Base title="Contact — Amelie Brazelton" description={contact.pitch} showFooter={false}>
   <main>
@@ -14,7 +13,7 @@ const headshot = resolveImage(contact.headshot);
     <div class="wrap">
       <div class="contact-lead">
         <figure class="contact-headshot">
-          {headshot && <Image src={headshot} alt={site.name} width={520} quality={80} format="webp" />}
+          {headshot && <img src={headshot} alt={site.name} loading="lazy" />}
         </figure>
         <div class="contact-intro">
           <h3><Emphasis text={contact.heading} emphasis={contact.emphasis} /></h3>

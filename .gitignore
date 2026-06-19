@@ -13,3 +13,6 @@ npm-debug.log*
 .DS_Store
 # original Claude Design export bundle (reference only — kept locally, not tracked)
 _source/
+
+# macOS text clippings (may contain pasted secrets)
+*.textClipping
