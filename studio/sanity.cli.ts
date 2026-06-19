@@ -12,4 +12,5 @@ export default defineCliConfig({
      Change if taken. */
   studioHost: 'ameliebrazelton',
   autoUpdates: true,
+  appId: 'hreh7ys5q2ot92fj3g801cuu'
 });

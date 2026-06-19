@@ -1,9 +1,9 @@
 import { defineType, defineField } from 'sanity';
 
-// Schema name is "document" (the academic-paper type). Exported as
-// `documentType` to avoid shadowing the global `document`.
+// Type name is "paper" — "document" is a reserved schema type name in Sanity v4.
+// Still the academic-paper / PDF type. Exported as `documentType`.
 export const documentType = defineType({
-  name: 'document',
+  name: 'paper',
   title: 'Document (PDF)',
   type: 'document',
   fields: [

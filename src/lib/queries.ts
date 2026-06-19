@@ -44,7 +44,7 @@ export const homeQuery = `{
 export const writingQuery = `{
   "sections": *[_type=="sections"][0]${SECTIONS},
   "clips": *[_type=="clip"]|order(publishedAt desc)${CLIP},
-  "documents": *[_type=="document"]|order(publishedAt desc)${DOCUMENT}
+  "documents": *[_type=="paper"]|order(publishedAt desc)${DOCUMENT}
 }`;
 
 export const creativeQuery = `{

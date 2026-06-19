@@ -108,8 +108,8 @@ async function run() {
   // documents
   for (const d of content.documents) {
     docs.push(clean({
-      _id: `document-${d.id}`,
-      _type: 'document',
+      _id: `paper-${d.id}`,
+      _type: 'paper',
       title: d.title,
       shortTitle: d.shortTitle,
       type: d.type,

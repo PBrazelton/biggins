@@ -37,10 +37,10 @@ export const structure: StructureResolver = (S) =>
             .title('Essays')
             .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
         ),
-      S.documentTypeListItem('document')
+      S.documentTypeListItem('paper')
         .title('Documents (PDFs)')
         .child(
-          S.documentTypeList('document')
+          S.documentTypeList('paper')
             .title('Documents')
             .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
         ),
