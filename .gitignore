@@ -16,3 +16,6 @@ _source/
 
 # macOS text clippings (may contain pasted secrets)
 *.textClipping
+
+# Sanity studio build cache
+.sanity/
