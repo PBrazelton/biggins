@@ -1,0 +1,31 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import SocialGallery from '../../components/SocialGallery.astro';
+import '../../styles/page-social.css';
+import { fetchSocial } from '../../lib/queries';
+
+const galleries = await fetchSocial();
+---
+<PageLayout
+  title="Design for the feed — Amelie Brazelton"
+  description="Graphics, flyers and campaign assets across three years of freelance social media work."
+  pageClass="dir-spread"
+>
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Selected Work · Social &amp; Visual</div>
+      <h1>Design for the <em>feed</em>.</h1>
+    </div>
+    <p class="lede">Graphics, flyers and campaign assets built across three years of freelance social media work for small wellness practices and community organizations.</p>
+  </header>
+
+  <div class="social-intro">
+    <p>I treat a feed the way I treat a story — one voice, carried across formats without losing what makes it true. Strategy, design and scheduling, in-house for each client.</p>
+    <div class="stat-strip">
+      <div class="stat"><div class="n">Three</div><div class="l">Client brands</div></div>
+      <div class="stat"><div class="n">EN · PT</div><div class="l">Working languages</div></div>
+    </div>
+  </div>
+
+  {galleries.map((g: any) => <SocialGallery gallery={g} />)}
+</PageLayout>

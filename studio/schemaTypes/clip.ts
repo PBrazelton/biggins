@@ -29,6 +29,12 @@ export const clip = defineType({
       type: 'datetime',
       description: 'Used only for ordering — the card shows "Display date".',
     }),
+    defineField({
+      name: 'group',
+      type: 'string',
+      description: 'Index grouping on the Writing page, e.g. "2026 · Reporting", "2023–2024 · Early work".',
+    }),
+    defineField({ name: 'order', type: 'number', description: 'Order within the Writing index (lower first).' }),
     defineField({ name: 'publication', type: 'string' }),
     defineField({
       name: 'url',

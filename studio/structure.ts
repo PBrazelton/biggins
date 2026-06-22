@@ -51,11 +51,18 @@ export const structure: StructureResolver = (S) =>
             .title('Field frames')
             .defaultOrdering([{ field: 'order', direction: 'asc' }])
         ),
+      S.documentTypeListItem('socialGallery')
+        .title('Social galleries')
+        .child(
+          S.documentTypeList('socialGallery')
+            .title('Social galleries')
+            .defaultOrdering([{ field: 'order', direction: 'asc' }])
+        ),
       S.documentTypeListItem('socialWork')
-        .title('Social work')
+        .title('Social tiles (legacy)')
         .child(
           S.documentTypeList('socialWork')
-            .title('Social work')
+            .title('Social tiles')
             .defaultOrdering([{ field: 'order', direction: 'asc' }])
         ),
     ]);

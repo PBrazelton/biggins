@@ -3,6 +3,7 @@ import { documentType } from './document';
 import { essay } from './essay';
 import { fieldFrame } from './fieldFrame';
 import { socialWork } from './socialWork';
+import { socialGallery } from './socialGallery';
 import { site } from './site';
 import { hero } from './hero';
 import { sections } from './sections';
@@ -16,6 +17,7 @@ export const schemaTypes = [
   essay,
   fieldFrame,
   socialWork,
+  socialGallery,
   // singletons
   site,
   hero,

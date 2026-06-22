@@ -1,55 +1,43 @@
 ---
-import Base from '../layouts/Base.astro';
+import PageLayout from '../layouts/PageLayout.astro';
 import Emphasis from '../components/Emphasis.astro';
 import { imageUrl } from '../lib/sanity';
-import { fetchContact, fetchSite } from '../lib/queries';
+import { fetchContact } from '../lib/queries';
+import '../styles/page-contact.css';
 
-const [contact, site] = await Promise.all([fetchContact(), fetchSite()]);
-const headshot = imageUrl(contact.headshot, 520);
+const contact = await fetchContact();
+const portrait = imageUrl(contact.headshot, 900);
 ---
-<Base title="Contact — Amelie Brazelton" description={contact.pitch} showFooter={false}>
-  <main>
-  <footer id="contact" class="fullbleed">
-    <div class="wrap">
-      <div class="contact-lead">
-        <figure class="contact-headshot">
-          {headshot && <img src={headshot} alt={site.name} loading="lazy" />}
-        </figure>
-        <div class="contact-intro">
-          <h3><Emphasis text={contact.heading} emphasis={contact.emphasis} /></h3>
-          <p class="pitch">{contact.pitch}</p>
-        </div>
-      </div>
-      <div>
-        <div class="col-label">Email</div>
-        <ul>
-          <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
-        </ul>
-        <div class="col-label" style="margin-top:24px">Press kit</div>
-        <ul>
-          <li><a href={contact.pressKit.url}>{contact.pressKit.label}</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="col-label">Elsewhere</div>
-        <ul>
-          {contact.elsewhere.map((link) => (
-            <li><a href={link.url} target="_blank" rel="noopener">{link.label}</a></li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <div class="col-label">On file</div>
-        <ul>
-          {contact.onFile.map((link) => (
-            <li><a href={link.url}>{link.label}</a></li>
-          ))}
-        </ul>
-      </div>
-      <div class="colophon">
-        {site.colophon.map((line) => <span>{line}</span>)}
+<PageLayout title="Contact — Amelie Brazelton" description={contact.pitch}>
+  <header class="contact-hero">
+    <div>
+      <div class="eyebrow">Contact · Say hello</div>
+      <h1><Emphasis text={contact.heading} emphasis={contact.emphasis} /></h1>
+      <p class="pitch">{contact.pitch}</p>
+      <div class="contact-actions">
+        {(contact.elsewhere ?? []).map((l: any) => (
+          <a class="sbtn" href={l.url} target="_blank" rel="noopener">{l.label} ↗</a>
+        ))}
       </div>
     </div>
-  </footer>
-  </main>
-</Base>
+    <figure class="contact-portrait" style={portrait ? `background-image:url('${portrait}')` : undefined}></figure>
+  </header>
+
+  <div class="email-row">
+    <a class="big" href={`mailto:${contact.email}`}>{contact.email}</a>
+    <div class="where">
+      <span class="avail">Available for assignment</span><br />
+      Minneapolis, MN · EN · PT
+    </div>
+  </div>
+
+  <div class="resume-row">
+    <div>
+      <div class="col-label">Résumé</div>
+      <p class="rdesc">A one-page PDF — experience, bylines, and education.</p>
+    </div>
+    <a class="resume-dl" href={contact.pressKit?.url} download>Download résumé ↓</a>
+  </div>
+
+  <div style="height:56px"></div>
+</PageLayout>

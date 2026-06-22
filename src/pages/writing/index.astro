@@ -1,31 +1,55 @@
 ---
-import Base from '../../layouts/Base.astro';
-import Emphasis from '../../components/Emphasis.astro';
-import ClipCard from '../../components/ClipCard.astro';
-import DocRow from '../../components/DocRow.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
 import { fetchWriting } from '../../lib/queries';
 
-const { sections, clips, documents } = await fetchWriting();
----
-<Base title="Writing — Amelie Brazelton">
-  <main>
-    <section id="writing">
-      <div class="section-head">
-        <div class="num">{sections.writing.num}</div>
-        <h2><Emphasis text={sections.writing.title} emphasis={sections.writing.emphasis} /></h2>
-      </div>
-      <div class="clips">
-        {clips.map((clip) => <ClipCard clip={clip} />)}
-      </div>
+const { clips, papers } = await fetchWriting();
 
-      <!-- Academic & Science -->
-      <div class="subhead">
-        <div class="num">{sections.research.num}</div>
-        <h3><Emphasis text={sections.research.title} emphasis={sections.research.emphasis} /></h3>
-      </div>
-      <div class="aclist">
-        {documents.map((doc) => <DocRow doc={doc} />)}
-      </div>
+// group clips by `group`, preserving first-appearance order (clips are order asc)
+const groups: { name: string; rows: any[] }[] = [];
+for (const c of clips) {
+  let g = groups.find((x) => x.name === c.group);
+  if (!g) { g = { name: c.group || 'Other', rows: [] }; groups.push(g); }
+  g.rows.push(c);
+}
+---
+<PageLayout title="Articles — Amelie Brazelton" description="Selected reporting, features, and academic work by Amelie Brazelton.">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">On File · Published Work</div>
+      <h1>Selected <em>articles</em>.</h1>
+    </div>
+    <p class="lede">A running record of published reporting, features, and academic work. Click any line to read the piece.</p>
+  </header>
+
+  {groups.map((group) => (
+    <section class="clip-group">
+      <div class="year">{group.name}</div>
+      {group.rows.map((row) => (
+        <a class="clip-row" href={row.url} target="_blank" rel="noopener">
+          <div class="when">{row.date}<span class="pub">{row.publication}</span></div>
+          <div>
+            <h3>{row.title}</h3>
+            {row.deck && <p>{row.deck}</p>}
+          </div>
+          <div class="tags">{(row.tags ?? []).map((t: string) => <span>{t}</span>)}</div>
+        </a>
+      ))}
     </section>
-  </main>
-</Base>
+  ))}
+
+  {papers.length > 0 && (
+    <section class="clip-group">
+      <div class="year">Research &amp; academic</div>
+      {papers.map((p: any) => (
+        <a class="clip-row" href={p.fileUrl ?? '#'} target="_blank" rel="noopener">
+          <div class="when">{p.date}<span class="pub">{p.publisher}</span></div>
+          <div>
+            <h3>{p.title}</h3>
+            {p.abstract && <p>{p.abstract}</p>}
+          </div>
+          <div class="tags">{(p.tags ?? []).map((t: string) => <span>{t}</span>)}</div>
+        </a>
+      ))}
+    </section>
+  )}
+</PageLayout>

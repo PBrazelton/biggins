@@ -1,0 +1,32 @@
+---
+import { imageUrl } from '../lib/sanity';
+
+const { gallery } = Astro.props;
+const ig = (gallery.igHandle || '').replace(/\s*↗\s*$/, '');
+---
+<section class="client">
+  <div class="client-head">
+    {gallery.cnum && <div class="cnum">{gallery.cnum}</div>}
+    <h2>{gallery.client}</h2>
+    {gallery.description && <p>{gallery.description}</p>}
+    {gallery.roles?.length > 0 && (
+      <div class="roles">{gallery.roles.map((r: string) => <span>{r}</span>)}</div>
+    )}
+    {gallery.igUrl && (
+      <a class="ig-line" href={gallery.igUrl} target="_blank" rel="noopener">{ig} ↗</a>
+    )}
+  </div>
+  <div class="gallery-rail">
+    <div class="gallery-track">
+      {(gallery.frames ?? []).map((f: any) => {
+        const src = imageUrl(f.image, 1200);
+        return (
+          <a class="gframe" href={gallery.igUrl} target="_blank" rel="noopener">
+            {src && <img src={src} alt={f.alt || f.title} loading="lazy" />}
+            <div class="cap"><span>{f.title}</span><span class="p">{f.kind}</span></div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>

@@ -1,21 +1,21 @@
 ---
-import Base from '../../layouts/Base.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
 import EssayCard from '../../components/EssayCard.astro';
+import '../../styles/page-notebook.css';
 import { fetchCreative } from '../../lib/queries';
 
-const { sections, essays } = await fetchCreative();
+const { essays } = await fetchCreative();
 ---
-<Base title="Creative — Amelie Brazelton">
-  <main>
-  <section class="creative fullbleed">
-    <div class="inner">
-      <div class="kicker">{sections.creative.num}</div>
-      <h2>{sections.creative.title}<span class="serifit">{sections.creative.subtitle}</span></h2>
-      <p class="intro">{sections.creative.intro}</p>
-      <div class="snaps">
-        {essays.map((essay) => <EssayCard essay={essay} />)}
-      </div>
+<PageLayout title="The notebook — Amelie Brazelton" description="Personal essays and literary nonfiction by Amelie Brazelton.">
+  <header class="page-head nb-head">
+    <div>
+      <div class="eyebrow">§ 03 — Creative Nonfiction &amp; Personal</div>
+      <h1>The notebook<span class="serifit">— essays, in a quieter voice.</span></h1>
     </div>
-  </section>
-  </main>
-</Base>
+    <p class="lede">Where the reporting ends and the reflecting begins. Personal essays and literary nonfiction, entered through the image that started each one. Tap a frame to read.</p>
+  </header>
+
+  <div class="snaps">
+    {essays.map((essay: any) => <EssayCard essay={essay} />)}
+  </div>
+</PageLayout>

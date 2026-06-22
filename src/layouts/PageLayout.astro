@@ -1,0 +1,88 @@
+---
+import '../styles/pages.css';
+import Emphasis from '../components/Emphasis.astro';
+import { fetchFooter } from '../lib/queries';
+
+interface Props {
+  title: string;
+  description?: string;
+  pageClass?: string;
+}
+const { title, description, pageClass } = Astro.props;
+const { site, contact } = await fetchFooter();
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === '/') return pathname === '/';
+  const base = href.endsWith('/') ? href : href + '/';
+  return pathname === href || pathname.startsWith(base);
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=Caveat:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a class="mark" href="/">{site.name}<span class="dot"></span></a>
+    <ul>
+      {site.nav.map((n: any) => (
+        <li><a class:list={['navlink', { active: isActive(n.href) }]} href={n.href}>{n.label}</a></li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<div class:list={['page', pageClass]}>
+  <a class="crumb" href="/">← Back to home</a>
+  <slot />
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h3><Emphasis text={contact.heading} emphasis={contact.emphasis} /></h3>
+      <p class="pitch">{contact.pitch}</p>
+    </div>
+    <div>
+      <div class="col-label">Email</div>
+      <ul><li><a href={`mailto:${contact.email}`}>{contact.email}</a></li></ul>
+      <div class="col-label" style="margin-top:24px">Press kit</div>
+      <ul><li><a href={contact.pressKit?.url} download>{contact.pressKit?.label}</a></li></ul>
+    </div>
+    <div>
+      <div class="col-label">Elsewhere</div>
+      <ul>
+        {(contact.elsewhere ?? []).map((l: any) => (
+          <li><a href={l.url} target="_blank" rel="noopener">{l.label}</a></li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <div class="col-label">On file</div>
+      <ul>
+        {(contact.onFile ?? []).map((l: any) => (
+          <li><a href={l.url} class:list={{ active: isActive(l.url) }}>{l.label}</a></li>
+        ))}
+      </ul>
+    </div>
+    <div class="colophon">
+      {(site.colophon ?? []).map((line: string) => <span>{line}</span>)}
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
