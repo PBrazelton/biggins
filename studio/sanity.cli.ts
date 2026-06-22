@@ -11,8 +11,8 @@ export default defineCliConfig({
   /* Studio hostname for `sanity deploy` — becomes <studioHost>.sanity.studio.
      Change if taken. */
   studioHost: 'ameliebrazelton',
-  autoUpdates: true,
   deployment: {
     appId: 'hreh7ys5q2ot92fj3g801cuu',
+    autoUpdates: true,
   },
 });
